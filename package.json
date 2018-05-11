@@ -1,0 +1,32 @@
+{
+  "name": "js-playground",
+  "version": "1.0.0",
+  "description": "A place to test out node modules and js code snippets",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "run": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/albeeboy/js-playground.git"
+  },
+  "keywords": [
+    "JS",
+    "JavaScript",
+    "Playground"
+  ],
+  "author": "Alberto Cristancho",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/albeeboy/js-playground/issues"
+  },
+  "homepage": "https://github.com/albeeboy/js-playground#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.3"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "express": "^4.16.3"
+  }
+}
