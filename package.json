@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "A place to test out node modules and js code snippets",
   "main": "index.js",
+  "engines": {
+    "node": "9.3.0",
+    "npm": "6.0.0"
+  },
   "scripts": {
     "test": "test",
     "run": "node index.js"
