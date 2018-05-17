@@ -1,46 +1,40 @@
 // message.watsonData = outputData
 let outputData = {
     intents: [{
-        intent: 'search_capabilities',
-        confidence: 1
+        intent: 'search_case_component',
+        confidence: 0.33017634153366093
     }],
     entities: [{
-            entity: 'work_type',
+            entity: 'case_component',
             location: [Array],
-            value: 'brand',
+            value: 'deck_case_study',
             confidence: 1,
             expected: true
         },
         {
-            entity: 'work_capability',
+            entity: 'client_name',
             location: [Array],
-            value: 'brand_positioning',
+            value: 'First Data',
             confidence: 1,
             expected: true
         }
     ],
-    input: {
-        text: 'brand_positioning'
-    },
+    input: { text: 'I need to find a deck case study for First Data' },
     output: {
-        text: ['app: work_capability'],
-        nodes_visited: ['node_2_1525985977169', 'node_2_1525985977169'],
-        warning: 'DialogNode: Event handler with ID [handler_7_1525985977169] of type [focus] has no condition, context, or output specified. It will be ignored.',
-        log_messages: [
-            [Object]
-        ]
+        text: ['app: client_name: case_component'],
+        nodes_visited: ['node_2_1526487621477', 'node_2_1526487621477'],
+        log_messages: []
     },
     context: {
-        conversation_id: 'e932be79-4d86-488b-886e-9b2d31128f8c',
+        conversation_id: 'b56253bf-c03e-468a-9a24-ab7f1be6da90',
         system: {
             dialog_stack: [Array],
-            dialog_turn_counter: 4,
-            dialog_request_counter: 4,
-            _node_output_map: [Object],
-            branch_exited: true,
-            branch_exited_reason: 'completed'
+            dialog_turn_counter: 3,
+            dialog_request_counter: 3,
+            _node_output_map: [Object]
         },
-        work_capability: 'brand_positioning'
+        client_name: 'First Data',
+        case_component: 'deck_case_study'
     }
 }
 

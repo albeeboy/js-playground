@@ -1,4 +1,6 @@
 var outputData = require('./data/outputData');
+var outputArray = require('./data/outputArray');
+let dataURL = "https://vsa-casestudies-broker-bot.herokuapp.com";
 
 let rawstr = 'Healthcare & Pharmaceuticals, Agriculture, Consumer Packaged Goods';
 var strArr = rawstr.split(',');
@@ -8,7 +10,6 @@ strArr.forEach(function(el, i, arr) {
 
 
 var output = narrowSearchTerm(strArr, 'Healthcare & Pharmaceuticals');
-// console.log('output = ' + output);
 
 function narrowSearchTerm (input, match) {
   let output;
@@ -42,6 +43,12 @@ function getMatchKey (obj) {
   return arr[1];
 }
 
+function getMatchArray (obj) {
+  var arr = convertToArray(obj.output.text[0], ':');
+  arr.shift();
+  return arr;
+}
+
 function retrieveEntityValue (obj, match) {
   if(Array.isArray(obj.entities)) {
     var val, idx;
@@ -58,7 +65,50 @@ function retrieveEntityValue (obj, match) {
   }
 }
 
-var key = '@' + match;
-var val = retrieveEntityValue(outputData, match);
-console.log('https://vsa-casestudies-broker-bot.herokuapp.com/case_studies?' + key + '=' + val);
+function generateGetURL (outputObj) {
+  var getURL = dataURL + '/case_studies?';
+  var matchArray = getMatchArray(outputObj);
+  matchArray.forEach(function (el, i, arr) {
+    let key = '@' + el;
+    let val = retrieveEntityValue(outputObj, el);
+    let like = (key === '@work_capability' || key === '@client_industry' || key === '@work_type' || key === '@case_component') ? '_like' : '';
+    let amp = (i < arr.length - 1) ? '&' : '';
+    getURL += key + like + '=' + encodeURIComponent(val) + amp
+  });
+  return getURL;
+}
 
+function formatResponse (dataArray) {
+  var message = '';
+  if (Array.isArray(dataArray)) {
+    switch (dataArray.length) {
+      case 0:
+        message = 'Your search generated 0 results. Would you like to run another search?';
+        break;
+      case 1:
+        message = 'Your search generated 1 result:\n';
+        message += iterateResults(dataArray);
+        break;
+      default:
+        message = 'Your search generated ' + dataArray.length + ' results:\n';
+        message += iterateResults(dataArray);
+    }
+  } else {
+    message = 'Sorry, there was a massive error that I couldn’t recover from. Please start over. ☹️';
+  }
+  return message;
+}
+
+function iterateResults (array) {
+  var results = '';
+  array.forEach(function (el, i, arr) {
+    var eol = (i < arr.length - 1) ? '.\n' : '.';
+    results += (i + 1) + '. A ' + el['@case_component'] + ' named "' + el['case_study_name'] + '" can be found at ' + el['asset_url'] + eol;
+  });
+  return results;
+}
+
+var url = generateGetURL(outputData);
+var message = formatResponse(outputArray);
+console.log('url: ', url);
+console.log('message: ', message);
