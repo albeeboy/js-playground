@@ -1,0 +1,15 @@
+{
+  "context": {
+    "size": null,
+    "color": null
+  },
+  "output": {
+    "text": {
+      "values": [
+        "OK, I'm on it! You can search by client name, work capability, client industry, work type or case component."
+      ],
+      "selection_policy": "sequential",
+      "deleted": "<? context.remove('client_name')?> <? context.remove('work_capability') ?>"
+    }
+  }
+}
