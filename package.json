@@ -4,8 +4,8 @@
   "description": "A place to test out node modules and js code snippets",
   "main": "index.js",
   "engines": {
-    "node": "9.3.0",
-    "npm": "6.0.0"
+    "node": "16.16.0",
+    "npm": "8.18.0"
   },
   "scripts": {
     "test": "test",
