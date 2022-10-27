@@ -40,7 +40,7 @@ function solution(numbers, left, right) {
   numbers.forEach((num, index) => {
     console.log("index: ", index);
     console.log("num: ", num);
-    for (i = left; i <= right; i++) {
+    for (let i = left; i <= right; i++) {
       console.log("result: ", (index + 1) * i);
       if ((index + 1) * i == num) {
         bools.push(true);
@@ -366,11 +366,32 @@ function allTheLongestStrings(inputArray) {
 
 const someObj = {
   talk: (talkersName) => {
-    console.log(`${talkersName} is talking to you!`);
+    console.log(talkersName + " is talking to you!");
   },
   talks: (talker) => {
     console.log(`${talker} is talking to you!`);
   },
 };
 console.log(someObj.talk("Lenny"));
-console.log(someObj.talks("George"));
+// console.log(someObj.talks("George"));
+
+function primeResult(num) {
+  let count = 0;
+  for (i = 2; i <= num; i++) {
+    if (isPrime(i)) {
+      count++;
+    } else {
+      continue;
+    }
+  }
+  return count;
+}
+
+function isPrime(num) {
+  if (num < 2) return false;
+  for (var i = 2; i < num; i++) {
+    if (num % i == 0) return false;
+  }
+  return true;
+}
+primeResult(5);
